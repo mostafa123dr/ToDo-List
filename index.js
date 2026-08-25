@@ -6,12 +6,10 @@ const tasksTable = document.getElementById("tasks");
 const openTasks = document.getElementById("openTasks");
 const totalTasks = document.getElementById("totalTasks");
 const clearClosedTasks = document.getElementById("clearClosedTasks");
-const placehold = document.getElementById("placehold");
 const search = document.getElementById("search");
 let tasks = [];
-let id = 1;
+let id;
 let searchBy = "all";
-let openTask = 0;
 
 loadTasks(showTasks);
 
@@ -20,14 +18,13 @@ addTaskName.addEventListener("submit" , event => {
     event.preventDefault();
 
     if(taskName.value === ""){
-        placehold.textContent = "Task cant be empty!";
+        window.alert("Task cant be empty!");
     }
     else{
 
         if(placehold){
             placehold.remove();
         }
-        openTask++;
         const task = {id : id++, toDo : taskName.value, isDone : false};
         tasks.push(task);
         showTasks();
@@ -40,7 +37,7 @@ addTaskName.addEventListener("submit" , event => {
 
 tasksTable.addEventListener("click" , event => {
 
-    if(event.target.id === "deletTask"){
+    if(event.target.classList.contains("deletTask")){
         const div = event.target.closest(".task");
         const id = Number(div.dataset.id);
         const line = div.nextElementSibling;
@@ -49,7 +46,6 @@ tasksTable.addEventListener("click" , event => {
 
         div.remove();
         line.remove();
-        openTask--;
         showTasks();
         saveTasks();
     }
@@ -63,14 +59,7 @@ tasksTable.addEventListener("change" , event => {
     p.classList.toggle("done");
 
     const index = tasks.findIndex(task => task.id === id)
-    if(event.target.checked){
-        tasks[index].isDone = true;
-        openTask--;
-    }
-    else{
-        tasks[index].isDone = false;
-        openTask++;
-    }
+    tasks[index].isDone = event.target.checked;
 
     showTasks();
     saveTasks();
@@ -110,7 +99,7 @@ function addTask(task , index){
     }
 
     const button = document.createElement("button");
-    button.id = "deletTask";
+    button.classList.add("deletTask");
     button.textContent = "x";
 
     div.append(span , input , p , button);
@@ -123,22 +112,21 @@ function addTask(task , index){
 }
 
 function showTasks() {
-    if(tasks.length === 0 && !taskName){
+
+    if(tasks.length === 0){
         tasksTable.innerHTML = `<p id="placehold">No entries yet. Write your first line above.</p>`;
     }
     else{
         tasksTable.innerHTML = "";
+        const visibleTasks = getTasksToShow();
+        visibleTasks.forEach( (task , index) => {
+            addTask(task , index+1);
+        });
     }
-    const visibleTasks = getTasksToShow();
-    visibleTasks.forEach( (task , index) => {
-        addTask(task , index+1);
-    });
 
-    if(openTask < 0){
-        openTask = 0;
-    }
-    openTasks.textContent = `${openTask} open`;
+    openTasks.textContent = `${tasks.filter(task => !task.isDone).length} open`;
     totalTasks.textContent = `${tasks.length} total`;
+
 }
 
 function getTasksToShow() {
@@ -155,16 +143,23 @@ clearClosedTasks.onclick = function() {
 
 function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
-  localStorage.setItem("opened" , JSON.stringify(openTask));
+  localStorage.setItem("id" , JSON.stringify(id));
 }
 
 function loadTasks(callback) {
-    const saved = localStorage.getItem("tasks");
-    const opened = localStorage.getItem("opened");
-    if(saved){
-        tasks = JSON.parse(saved);
-        openTask = Number(JSON.parse(opened));
+    const savedTasks = localStorage.getItem("tasks");
+    const savedId = localStorage.getItem("id");
 
-        callback();
+    if(savedTasks){
+        tasks = JSON.parse(savedTasks);
+
     }
+    if(savedId){
+        id = JSON.parse(savedId);
+    }
+    else{
+        id = 1;
+    }
+
+    callback();
 }
