@@ -22,9 +22,6 @@ addTaskName.addEventListener("submit" , event => {
     }
     else{
 
-        if(placehold){
-            placehold.remove();
-        }
         const task = {id : id++, toDo : taskName.value, isDone : false};
         tasks.push(task);
         showTasks();
