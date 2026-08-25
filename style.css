@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Ubuntu:ital@1&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #16302A;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card{
+    width: 500px;
+    background-color: #1E3F36;
+    height: 60vh;
+    border: 2px solid #2F5B4D;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    overflow: hidden;
+}
+#header , .smallCaps{
+    font-family: sans-serif , Arial;
+}
+#header{
+
+    color: #C9A227;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: small;
+    margin-bottom: 15px;
+}
+h1{
+    font-size: 3rem;
+    color: #F1E9D8;
+}
+.smallCaps{
+    color: white;
+    font-size: smaller;
+    color: #8FAE9F;
+}
+.line{
+    background-color: #2F5B4D;
+    height: 1px;
+    width: 100%;
+    margin: 15px 0;
+}
+form{
+    margin-bottom: 15px;
+}
+form input{
+    border: none;
+    border-bottom: 1px solid #2F5B4D;
+    background-color: #1E3F36;
+    color: #8FAE9F;
+    padding: 7px 0;
+    width: 74%;
+    font-size: 1rem;
+    font-family: sans-serif , Arial;
+    word-spacing: 5px;
+    outline: none;
+}
+form input::placeholder{
+    color: #8FAE9F;
+}
+form button{
+    background-color: #C9A227;
+    width: 25%;
+    border: none;
+    border-radius: 5px;
+    height: 100%;
+    font-weight: bold;
+    cursor: pointer;
+}
+form button:hover{
+    background-color: hsl(46, 68%, 60%);
+}
+form button:active{
+    background-color: hsl(46, 68%, 70%);
+}
+.search{
+    display: flex;
+    gap: 15px;
+}
+.search button{
+    width: fit-content;
+    padding: 8px 10px;
+    font-size: 0.6rem;
+    background-color: #1E3F36;
+    border: 1px solid #16302A;
+    border-radius: 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.search button.active{
+    background-color: #F1E9D8;
+    border-color: black;
+}
+#tasks {
+    overflow: auto;
+    scrollbar-width: thin;
+    max-width: 100%;
+    scrollbar-color: #F1E9D8 transparent;
+}
+#tasks::-webkit-scrollbar{
+    width: 8px;
+}
+#tasks::-webkit-scrollbar-track{
+    background: transparent;
+}
+#tasks::-webkit-scrollbar-thumb{
+    background-color: #F1E9D8;
+    border-radius: 10px;
+    border: 2px solid #16302A;
+}
+#tasks #placehold{
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #f1e9d8;
+}
+.task{
+    display: flex;
+    align-items: center;
+    height: 35px;
+    gap: 20px;
+
+    color: #F1E9D8;
+}
+.task span {
+    font-family: monospace;
+}
+.task input {
+    appearance: none;
+    min-width: 22px;
+    height: 22px;
+    border: 2px solid #C9A227;
+    background-color: #1E3F36;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+.task input:checked{
+    background-color: #C9A227;
+}
+
+.task input:checked::after{
+    content: "✓";
+
+}
+.task p {
+    color: #F1E9D8;
+    flex: 1;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.task button{
+    background: none;
+    border: none;
+    color: #F1E9D8;
+    font-size: 1.7em;
+    cursor: pointer;
+}
+.task button:hover{
+    color: #C1543C;
+}
+.task p.done {
+    text-decoration: line-through;
+    color: hsl(41, 47%, 70%);
+}
+.footer{
+    display: flex;
+    margin-top: auto;
+    font-family: monospace;
+}
+.footer button{
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: hsl(0, 0%, 70%);
+    font-size: 0.8em;
+    margin-left: auto;
+    margin-right: 15px;
+    letter-spacing: 1px;
+}
+.footer button:hover{
+    color: #C1543C;
+}
+.footer div{
+    display: flex;
+    gap: 5px;
+    color: hsl(0, 0%, 70%);
+}

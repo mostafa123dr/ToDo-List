@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="card">
+        <p id="header">daily register</p>
+        <h1>The Ledger</h1>
+        <p class="smallCaps">Every line you write here is a promise to your future self.</p>
+        <div class="line"></div>
+        <form id="addTaskName">
+            <input type="text" name="" id="taskName" placeholder="Write a new entry...">
+            <button type="submit" id="submit">ADD ENTRY</button>
+        </form>
+        <div class="line"></div>
+        <div class="search" id="search">
+            <button id="all" class="active">ALL</button>
+            <button id="open">OPEN</button>
+            <button id="closed">CLOSED</button>
+        </div><br><br>
+        <div id="tasks">
+            <p id="placehold">No entries yet. Write your first line above.</p>
+        </div>
+        <br>
+        <div class="footer">
+            <div>
+                <p id="openTasks">0 open</p>
+                <span> &middot; </span>
+                <p id="totalTasks">0 total</p>
+            </div>
+            <button id="clearClosedTasks">clear closed entries</button>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
